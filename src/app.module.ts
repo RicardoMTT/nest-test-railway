@@ -5,17 +5,17 @@ import { ProductModule } from './product/product.module';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: 'localhost',
-      port: 3308,
-      username: 'root',
-      password: 'root',
-      database: 'testdb',
-      autoLoadEntities: true,
-      synchronize: true,
-    }),
-    AuthModule,
+    // TypeOrmModule.forRoot({
+    //   type: 'mysql',
+    //   host: 'localhost',
+    //   port: 3308,
+    //   username: 'root',
+    //   password: 'root',
+    //   database: 'testdb',
+    //   autoLoadEntities: true,
+    //   synchronize: true,
+    // }),
+    // AuthModule,
     ProductModule
   ],
   controllers: [],

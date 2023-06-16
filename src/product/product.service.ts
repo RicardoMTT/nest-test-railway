@@ -1,7 +1,4 @@
-import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm'; 
-import { Repository } from 'typeorm'; 
-import { Product } from './product.entity';
+import { Injectable } from '@nestjs/common'; 
 const productsMock = [
   {
     id:"1",
@@ -22,12 +19,12 @@ const productsMock = [
 @Injectable()
 export class ProductService {
   constructor(
-    @InjectRepository(Product)
-    private productRepository: Repository<Product>,
+    // @InjectRepository(Product)
+    // private productRepository: Repository<Product>,
   ) {}
   async products() {
     try {
-      const products = await this.productRepository.find();
+      // const products = await this.productRepository.find();
       return {
         products:productsMock,
       };
