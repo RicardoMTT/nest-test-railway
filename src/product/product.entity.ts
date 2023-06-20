@@ -8,6 +8,12 @@ export class Product {
     @Column({length:20})
     name:string;
 
+    @Column({length:20})
+    idCategory:string;
+
+    @Column({length:120})
+    descripcion:string;
+
     @Column()
     price:number;
 
