@@ -8,6 +8,8 @@ export class Product {
     @Column({length:20})
     name:string;
 
+    @Column()
+    price:number;
 
     @Column({type:'boolean',default:false})
     active:boolean;
