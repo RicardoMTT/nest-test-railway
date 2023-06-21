@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { Product } from './product.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Category } from './category.entity';
+import { Category } from '../category.entity';
+import { Product } from '../product.entity';
 const productsMock = [
   {
     id: '1',
@@ -59,6 +59,26 @@ export class ProductService {
     return {
       ok: true,
       product: categoryFound.product,
+    };
+  }
+
+  async getProduct(id) {
+    const productFound = await this.productRepository.findOne({
+      where: {
+        id
+      },
+      relations: ['category'],
+    });
+
+    if (!productFound) {
+      return {
+        ok: false,
+        data:null
+      };
+    }
+    return {
+      ok: true,
+      data:productFound,
     };
   }
 }
