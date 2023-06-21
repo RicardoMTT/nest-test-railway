@@ -1,26 +1,32 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { Category } from './category.entity';
 
 @Entity()
 export class Product {
-    @PrimaryGeneratedColumn('increment')
-    id:string;
+  @PrimaryGeneratedColumn('increment')
+  id: string;
 
-    @Column({length:20})
-    name:string;
+  @Column({ length: 20 })
+  name: string;
 
-    @Column({length:20})
-    idCategory:string;
+  @ManyToOne(() => Category, (category) => category.product)
+  category: Category;
 
-    @Column({length:120})
-    descripcion:string;
+  @Column({ length: 120 })
+  descripcion: string;
 
-    @Column()
-    price:number;
+  @Column()
+  price: number;
 
-    @Column({type:'boolean',default:false})
-    active:boolean;
+  @Column({ type: 'boolean', default: false })
+  active: boolean;
 
-    @CreateDateColumn()
-    createdOn:Date
-
+  @CreateDateColumn()
+  createdOn: Date;
 }
