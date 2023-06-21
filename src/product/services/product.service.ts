@@ -41,11 +41,10 @@ export class ProductService {
     }
   }
 
-  async getProductByCategoryId(categoryBody) {
-    const { idCategory } = categoryBody;
+  async getProductByCategoryId(id) {
     const categoryFound = await this.categoryRepository.findOne({
       where: {
-        id: idCategory,
+        id,
       },
       relations: ['product'],
     });
