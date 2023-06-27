@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Category } from '../category.entity';
 import { Product } from '../product.entity';
+import { ConfigService } from '@nestjs/config';
 const productsMock = [
   {
     id: '1',
@@ -23,12 +24,16 @@ const productsMock = [
 @Injectable()
 export class ProductService {
   constructor(
+    private configService: ConfigService,
     @InjectRepository(Product)
     private productRepository: Repository<Product>,
     @InjectRepository(Category)
     private categoryRepository: Repository<Category>,
   ) {}
   async products() {
+    const dbUser = this.configService.get<string>('DATABASE_USERNAME');
+    console.log(dbUser);
+    
     try {
       const products = await this.productRepository.find({
         relations: ['category'],
