@@ -34,10 +34,11 @@ export class PaymentController {
         },
       },
     );
-
+    console.log('access_token',access_token);
+    
     try {
       const response = await axios.post(
-        `https://api-m.sandbox.paypal.com/v1/oauth2/token/v2/checkout/orders`,
+        `https://api-m.sandbox.paypal.com/v2/checkout/orders`,
         orders,
         {
           headers: {
