@@ -16,8 +16,8 @@ export class PaymentController {
         brand_name: 'My store',
         landing_page: 'NO_PREFERENCE',
         user_action: 'PAY_NOW',
-        return_url: `http://localhost:4200/#/capture-order`,
-        cancel_url: `http://localhost:4200`,
+        return_url: `https://store.ricardotovart.com/#/capture-order`,
+        cancel_url: `https://store.ricardotovart.com/#/`,
       },
     };
     const params = new URLSearchParams();
