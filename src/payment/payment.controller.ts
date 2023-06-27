@@ -23,19 +23,19 @@ export class PaymentController {
     const {
       data: { access_token },
     } = await axios.post(
-      `${this.configService.get<string>('PAYPAL_API')}/v1/oauth2/token`,
+      `https://api-m.sandbox.paypal.com/v1/oauth2/token`,
       params,
       {
         auth: {
-          username: this.configService.get<string>('PAYPAL_USERNAME'),
-          password: this.configService.get<string>('PAYPAL_PASSWORD'),
+          username: 'ATyy9yhW2UZ_7s6C1u9MT9XG9wOP1fAprKlC3u9u24RHXzUsmBoLh_sJIm3TNWAw09m7Z25nuXcmoNZB',
+          password: 'EKTFDE3l51Ym9-bf6t9jz33rYHRNOeIcn6Wf8ZezbcjzQ9ugO01ET556z75m01SqAJTArjf0MS-CcJ_B'
         },
       },
     );
 
     try {
       const response = await axios.post(
-        `${this.configService.get<string>('PAYPAL_API')}/v2/checkout/orders`,
+        `https://api-m.sandbox.paypal.com/v1/oauth2/token/v2/checkout/orders`,
         orders,
         {
           headers: {
