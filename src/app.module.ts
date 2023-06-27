@@ -12,7 +12,7 @@ import { PaymentModule } from './payment/payment.module';
      useFactory: (configService:ConfigService) =>({
       type: 'mysql',
       host: 'containers-us-west-193.railway.app',
-      port: configService.get('PORT'),
+      port: 7938,
       username: 'root',
       password: 'Knie6Nf0vYbcEsgpbHuM',
       database: 'railway',
