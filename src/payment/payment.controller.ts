@@ -7,6 +7,8 @@ export class PaymentController {
 
   @Post('/create-order')
   async getData(@Body() products: any) {
+    console.log('products',products);
+    
     const orders = {
       intent: 'CAPTURE',
       purchase_units: products,
@@ -47,7 +49,7 @@ export class PaymentController {
         link: response.data.links[1].href,
       };
     } catch (error) {
-      console.log(error);
+      console.log('error',error);
     }
   }
 
