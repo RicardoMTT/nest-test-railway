@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Like, Repository } from 'typeorm';
 import { Category } from '../category.entity';
 import { Product } from '../product.entity';
 import { ConfigService } from '@nestjs/config';
@@ -70,6 +70,27 @@ export class ProductService {
     const productFound = await this.productRepository.findOne({
       where: {
         id
+      },
+      relations: ['category'],
+    });
+
+    if (!productFound) {
+      return {
+        ok: false,
+        data:null
+      };
+    }
+    return {
+      ok: true,
+      data:productFound,
+    };
+  }
+
+
+  async getProductByTerm(term) {
+    const productFound = await this.productRepository.findOne({
+      where: {
+         name:Like(`%${term}%`)
       },
       relations: ['category'],
     });

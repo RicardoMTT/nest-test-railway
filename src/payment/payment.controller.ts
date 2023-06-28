@@ -33,9 +33,7 @@ export class PaymentController {
           password: 'EKTFDE3l51Ym9-bf6t9jz33rYHRNOeIcn6Wf8ZezbcjzQ9ugO01ET556z75m01SqAJTArjf0MS-CcJ_B'
         },
       },
-    );
-    console.log('access_token',access_token);
-    
+    );    
     try {
       const response = await axios.post(
         `https://api-m.sandbox.paypal.com/v2/checkout/orders`,
