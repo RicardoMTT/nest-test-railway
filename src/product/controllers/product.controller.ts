@@ -14,16 +14,12 @@ export class ProductController {
   }
 
   @Get('/products-by-category/:id')
-  async getPrByCategory(@Param('id') id: number) {
-     console.log(id);
-     
+  async getPrByCategory(@Param('id') id: number) {     
     return this.productService.getProductByCategoryId(id);
   }
 
   @Get(':id')
-  async getProduct(@Param('id') id: number) {
-    console.log(id);
-    
+  async getProduct(@Param('id') id: number) {    
     const response = await this.productService.getProduct(id);
     return response
   }

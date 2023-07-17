@@ -7,6 +7,7 @@ import { Repository } from 'typeorm';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { LoginUserDto } from './dto/login-user.dto';
+import { TokenDto } from './dto/token.dto';
 @Injectable()
 export class AuthService {
   constructor(
@@ -48,17 +49,12 @@ export class AuthService {
           password:true
         }
       });
-      console.log(user);
       
       if (!user) {
         throw new UnauthorizedException('Credentials are not valid');
       }
 
-      //comparar una cadena sin cifrar con un hash que fue cifrado
-      console.log(password);
-      console.log(user.password);
-      
-      
+      //comparar una cadena sin cifrar con un hash que fue cifrado      
       if (!bcrypt.compareSync(password, user.password)) {
         throw new UnauthorizedException('Credentials are not valid');
       }
@@ -73,7 +69,19 @@ export class AuthService {
   }
 
   private getJwtToken(payload: any) {
-    const token = this.jwtService.sign(payload); // Generacion del token (JWT)
+    const token = this.jwtService.sign(payload,{
+      secret:'secreto'
+    }); // Generacion del token (JWT)
     return token;
+  }
+
+
+  async refresh(dto:TokenDto):Promise<any> {
+    const usuario = await this.jwtService.decode(dto.token);//obtener la data a partir del token
+    const payload  = {
+      id:usuario['id']
+    }
+    const token = await this.jwtService.sign(payload);
+    return {token}
   }
 }

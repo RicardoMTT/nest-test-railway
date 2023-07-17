@@ -17,9 +17,10 @@ import { User } from './user.entity';
     inject: [],
     useFactory: () => {
       return {
-        secret: 'secret',
+        secret: 'secreto',
         signOptions: {
-          expiresIn: '2h',
+          // expiresIn: '2h',
+          expiresIn:'50s'
         },
       };
     },

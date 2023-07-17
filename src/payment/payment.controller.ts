@@ -7,37 +7,65 @@ export class PaymentController {
 
   @Post('/create-order')
   async getData(@Body() products: any) {
-    console.log('products',products);
-    
-    const orders = {
-      intent: 'CAPTURE',
-      purchase_units: products,
-      application_context: {
-        brand_name: 'My store',
-        landing_page: 'NO_PREFERENCE',
-        user_action: 'PAY_NOW',
-        return_url: `https://store.ricardotovart.com/#/capture-order`,
-        cancel_url: `https://store.ricardotovart.com/#/`,
-      },
-    };
+     
+    // const orders = {
+    //   intent: 'CAPTURE',
+    //   purchase_units: products,
+    //   application_context: {
+    //     brand_name: 'My store',
+    //     landing_page: 'NO_PREFERENCE',
+    //     user_action: 'PAY_NOW',
+    //     return_url: `https://store.ricardotovart.com/#/capture-order`,
+    //     cancel_url: `https://store.ricardotovart.com/#/`,
+    //   },
+    // };
     const params = new URLSearchParams();
     params.append('grant_type', 'client_credentials');
+
+    /* Obtener el token de acceso */
     const {
       data: { access_token },
     } = await axios.post(
-      `https://api-m.sandbox.paypal.com/v1/oauth2/token`,
+      `${this.configService.get<string>(
+        'PAYPAL_API',
+      )}/v1/oauth2/token`,
       params,
       {
         auth: {
-          username: 'ATyy9yhW2UZ_7s6C1u9MT9XG9wOP1fAprKlC3u9u24RHXzUsmBoLh_sJIm3TNWAw09m7Z25nuXcmoNZB',
-          password: 'EKTFDE3l51Ym9-bf6t9jz33rYHRNOeIcn6Wf8ZezbcjzQ9ugO01ET556z75m01SqAJTArjf0MS-CcJ_B'
+          username: this.configService.get<string>(
+            'PAYPAL_USERNAME',
+          ),
+          password: this.configService.get<string>(
+            'PAYPAL_PASSWORD',
+          )
         },
       },
     );    
+
+    /* Crear la orden */
     try {
       const response = await axios.post(
-        `https://api-m.sandbox.paypal.com/v2/checkout/orders`,
-        orders,
+        `${this.configService.get<string>(
+          'PAYPAL_API',
+        )}/v2/checkout/orders`,
+        {
+          intent: "CAPTURE",
+          purchase_units: [
+            {
+              amount: {
+                currency_code: "USD",
+                value: products[0].amount.value,
+              },
+            },
+          ],
+          application_context: {
+            brand_name: 'My store',
+            landing_page: 'NO_PREFERENCE',
+            user_action: 'PAY_NOW',
+            return_url: `http://localhost:4200/#/capture-order`,
+            cancel_url: `http://localhost:4200/#/`,
+          },
+        },
         {
           headers: {
             Authorization: `Bearer ${access_token}`,
