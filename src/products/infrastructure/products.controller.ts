@@ -30,9 +30,6 @@ export class ProductsController {
   async products(
     @Query(new ValidationPipe({ transform: true })) pagination: PaginationDto,
   ) {
-    console.log('pagination',pagination);
-    console.log('limit',pagination.limit);
-    
     const pagination2: PaginationDto = {
       page: pagination.page,
       limit: pagination.limit,
