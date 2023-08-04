@@ -13,6 +13,8 @@ import { GetProductUseCaseService } from '../application/get-product-use-case.se
 import { IUseCaseGetProductByCategoryService } from '../application/get-product-by-category.interface';
 import { GetProductByCategoryUseCaseService } from '../application/get-product-by-category.service';
 import { PaginationDto } from './dto/pagination.dto';
+import { GetProductByNameUseCaseService } from '../application/get-product-by-name-use-case.service';
+import { IUseCaseGetProductByNameService } from '../application/get-product-by-name-use-case.interface';
 
 @Controller('products')
 export class ProductsController {
@@ -23,6 +25,8 @@ export class ProductsController {
     private readonly _getProductService: IUseCaseGetProductService,
     @Inject(GetProductByCategoryUseCaseService)
     private readonly _getProductByCategoryUseCaseService: IUseCaseGetProductByCategoryService,
+    @Inject(GetProductByNameUseCaseService)
+    private readonly _getProductByNameUseCaseService: IUseCaseGetProductByNameService
   ) {}
 
   // limit = cuantos elementos quieres mostrar por pagina
@@ -47,5 +51,12 @@ export class ProductsController {
   @Get('/products-by-category/:id')
   async getProductByCategory(@Param('id') id: number) {
     return this._getProductByCategoryUseCaseService.product(id);
+  }
+
+  @Get('/products-by-term/:term')
+  async getProductByTerm(@Param('term') term: string) {
+    console.log(term);
+    
+    return this._getProductByNameUseCaseService.getProductByName(term);
   }
 }

@@ -14,6 +14,7 @@ import { TokenExpirationGuard } from 'src/guards/tokenExpirationGuard';
 import { JwtService } from '@nestjs/jwt';
 import { GetProductUseCaseService } from './application/get-product-use-case.service';
 import { GetProductByCategoryUseCaseService } from './application/get-product-by-category.service';
+import { GetProductByNameUseCaseService } from './application/get-product-by-name-use-case.service';
  
 
 @Module({
@@ -21,6 +22,7 @@ import { GetProductByCategoryUseCaseService } from './application/get-product-by
 	controllers: [ProductsController,CategoryController],
 	providers: [ProductUseCaseService, ProductRepository, OrmProductRepository,
 		CategoryUseCaseService,CategoryRepository,OrmCategoryRepository,JwtService, TokenExpirationGuard,
-	GetProductUseCaseService,GetProductByCategoryUseCaseService],
+	GetProductUseCaseService,GetProductByCategoryUseCaseService,
+GetProductByNameUseCaseService],
 })
 export class ProductsModule {}
