@@ -8,7 +8,7 @@ import { IUseCaseGetProductByNameService } from './get-product-by-name-use-case.
 export class GetProductByNameUseCaseService implements IUseCaseGetProductByNameService {
 	constructor(@Inject(ProductRepository) private readonly productRepository: ICrudProductRepository) {}
    
-    getProductByName(name: any): Promise<ProductDto> {
+    getProductByName(name: any): Promise<ProductDto[]> {
         const product = this.productRepository.productByName(name);
         return product;
     }

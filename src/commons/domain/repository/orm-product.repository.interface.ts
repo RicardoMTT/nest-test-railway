@@ -8,5 +8,5 @@ export interface IOrmProductRepository {
 
 	productByCategory(id:any):Promise<IGetProductRepositoryDto[]>;
 	
-	productByName(name:any):Promise<IGetProductRepositoryDto>;
+	productByName(name:any):Promise<IGetProductRepositoryDto[]>;
 }

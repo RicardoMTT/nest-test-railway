@@ -13,8 +13,8 @@ export class OrmProductRepository
   constructor(dataSource: DataSource) {
     super(ProductEntity, dataSource.createEntityManager());
   }
-  async productByName(name: any): Promise<IGetProductRepositoryDto> {
-    const product = await this.findOne({
+  async productByName(name: any): Promise<IGetProductRepositoryDto[]> {
+    const product = await this.find({
       where: {
         name:Like(`%${name}%`)
       }
