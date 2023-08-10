@@ -54,9 +54,7 @@ export class ProductsController {
   }
 
   @Get('/products-by-term/:term')
-  async getProductByTerm(@Param('term') term: string) {
-    console.log(term);
-    
+  async getProductByTerm(@Param('term') term: string) {    
     return this._getProductByNameUseCaseService.getProductByName(term);
   }
 }

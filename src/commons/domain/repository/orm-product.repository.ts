@@ -40,9 +40,7 @@ export class OrmProductRepository
       },
     });
   }
-  async products(pagination:PaginationDto): Promise<IGetProductRepositoryDto[]> {
-    console.log(pagination);
-    
+  async products(pagination:PaginationDto): Promise<IGetProductRepositoryDto[]> {   
     const { page, limit } = pagination;
     const offset = (page - 1) * limit;
 
