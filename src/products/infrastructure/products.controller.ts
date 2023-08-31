@@ -15,6 +15,8 @@ import { GetProductByCategoryUseCaseService } from '../application/get-product-b
 import { PaginationDto } from './dto/pagination.dto';
 import { GetProductByNameUseCaseService } from '../application/get-product-by-name-use-case.service';
 import { IUseCaseGetProductByNameService } from '../application/get-product-by-name-use-case.interface';
+import { IUseCaseGetProductMoreSaleService } from '../application/get-product-more-sale-use-case.interface';
+import { GetProductMoreSaleUseCaseService } from '../application/get-product-more-sale-use-case.service';
 
 @Controller('products')
 export class ProductsController {
@@ -26,8 +28,15 @@ export class ProductsController {
     @Inject(GetProductByCategoryUseCaseService)
     private readonly _getProductByCategoryUseCaseService: IUseCaseGetProductByCategoryService,
     @Inject(GetProductByNameUseCaseService)
-    private readonly _getProductByNameUseCaseService: IUseCaseGetProductByNameService
+    private readonly _getProductByNameUseCaseService: IUseCaseGetProductByNameService,
+    @Inject(GetProductMoreSaleUseCaseService)
+    private readonly _getProductMoreSaleUseCaseService: IUseCaseGetProductMoreSaleService,
   ) {}
+
+  @Get('/product-more-sale')
+  async getProductMoreSale() {
+    return this._getProductMoreSaleUseCaseService.getProductMoreSale();
+  }
 
   // limit = cuantos elementos quieres mostrar por pagina
   @Get('/')
@@ -54,7 +63,7 @@ export class ProductsController {
   }
 
   @Get('/products-by-term/:term')
-  async getProductByTerm(@Param('term') term: string) {    
+  async getProductByTerm(@Param('term') term: string) {
     return this._getProductByNameUseCaseService.getProductByName(term);
   }
 }

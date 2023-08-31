@@ -3,7 +3,6 @@ import { DataSource, Repository } from 'typeorm';
 import { IOrmCategoryRepository } from './orm-category.repository.interface';
 import { CategoryEntity } from '../entities/category.entity';
 import { IGetCategoryRepositoryDto } from '../dto/category-repository';
-import { of } from 'rxjs';
 
 @Injectable()
 export class OrmCategoryRepository

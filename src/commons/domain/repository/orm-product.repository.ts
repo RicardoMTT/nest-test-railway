@@ -13,6 +13,43 @@ export class OrmProductRepository
   constructor(dataSource: DataSource) {
     super(ProductEntity, dataSource.createEntityManager());
   }
+  async getProductMoreSale(): Promise<IGetProductRepositoryDto> {
+    /*
+    Los 3 productos mas vendidos
+    SELECT p.*,sum(od.quantity) as totalQuantity
+    FROM testdb.product_entity p
+      INNER JOIN testdb.order_detail_entity as od
+    ON	p.id = od.productId
+      group by p.id 
+      ORDER BY
+          totalQuantity DESC
+    LIMIT 3;
+    */
+    const query = `
+        SELECT productId, SUM(quantity) AS totalQuantity
+        FROM testdb.order_detail_entity
+        GROUP BY productId
+        LIMIT 1;
+      `;
+    const result = await this.query(query);
+     // Verifica si hay un resultado de la consulta
+     if (result.length > 0) {
+      const productId = result[0].productId;
+
+      // Consulta el producto correspondiente al productId obtenido
+      const product = await this.product(productId);
+
+      // Agrega el producto al resultado y devuelve
+      return {
+        ...result[0],
+        product,
+      };
+    } else {
+      return null; // No se encontró ningún resultado
+    }
+    
+    return result;
+  }
   async productByName(name: any): Promise<IGetProductRepositoryDto[]> {
     const product = await this.find({
       where: {

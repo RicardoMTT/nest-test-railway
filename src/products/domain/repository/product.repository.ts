@@ -11,6 +11,11 @@ export class ProductRepository implements ICrudProductRepository {
 		@Inject(OrmProductRepository)
 		private readonly ormProductRepository: IOrmProductRepository 
 	) {}
+
+	async getProductMoreSale(): Promise<IProductRepositoryModel> {		
+		const result = await this.ormProductRepository.getProductMoreSale();
+		return result;
+	}
 	
 	async productByName(name: any): Promise<IProductRepositoryModel[]> {
 		const product = await this.ormProductRepository.productByName(name);

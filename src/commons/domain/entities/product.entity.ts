@@ -3,9 +3,11 @@ import {
     CreateDateColumn,
     Entity,
     ManyToOne,
+    OneToMany,
     PrimaryGeneratedColumn,
   } from 'typeorm';
 import { CategoryEntity } from './category.entity';
+import { OrderDetailEntity } from './order-details.entity';
    
   @Entity()
   export class ProductEntity {
@@ -29,5 +31,15 @@ import { CategoryEntity } from './category.entity';
   
     @CreateDateColumn()
     createdOn: Date;
+
+    //if value is more than 0 , the product has discount
+    @Column()
+    discount: number;
+
+    @Column({ length: 120 })
+    imageUrl: string;
+
+    @OneToMany(()=>OrderDetailEntity,(orderDetailEntity)=>orderDetailEntity.order)
+    orderDetailEntity:OrderDetailEntity;
   }
   

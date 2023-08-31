@@ -6,4 +6,5 @@ export interface ICrudProductRepository {
 	product(id: any): Promise<IProductRepositoryModel>;
 	productByCategory(id: any): Promise<IProductRepositoryModel[]>;
 	productByName(name: any): Promise<IProductRepositoryModel[]>;
+	getProductMoreSale():Promise<IProductRepositoryModel>;
 }
