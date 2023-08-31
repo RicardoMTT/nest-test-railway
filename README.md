@@ -10,3 +10,5 @@ src/commons/domain/dto: usado en el repository
 -Patron de diseño repository
 
 src/commons/infrastructure : Todo lo que se va a estar comunicando con el exterior(conexion a bd, controllers)
+## Diagrama 
+![image](https://github.com/RicardoMTT/nest-test-railway/assets/33745675/7e15c135-7131-455b-8cc5-c51e86667c97)
