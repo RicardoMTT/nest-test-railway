@@ -18,10 +18,11 @@ import { GetProductByNameUseCaseService } from './application/get-product-by-nam
 import { OrderDetailEntity } from 'src/commons/domain/entities/order-details.entity';
 import { OrderEntity } from 'src/commons/domain/entities/order.entity';
 import { GetProductMoreSaleUseCaseService } from './application/get-product-more-sale-use-case.service';
+import { CommentEntity } from 'src/commons/domain/entities/comment.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([ProductEntity, CategoryEntity,OrderDetailEntity,OrderEntity], ),
+    TypeOrmModule.forFeature([ProductEntity, CategoryEntity,OrderDetailEntity,OrderEntity,CommentEntity], ),
   ],
   controllers: [ProductsController, CategoryController],
   providers: [

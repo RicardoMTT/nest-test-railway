@@ -21,5 +21,6 @@ export class OrderDetailEntity{
     @ManyToOne(()=>ProductEntity,(productEntity)=>productEntity.orderDetailEntity)
     product:ProductEntity;
 
-    
+    @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+    created_at: Date;
 }

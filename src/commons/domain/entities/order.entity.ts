@@ -23,4 +23,7 @@ export class OrderEntity{
 
     @OneToMany(()=>OrderDetailEntity,(orderDetailEntity)=>orderDetailEntity.order)
     orderDetailEntity:OrderDetailEntity;
+    
+    @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+    created_at: Date;
 }

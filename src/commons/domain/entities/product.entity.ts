@@ -8,6 +8,7 @@ import {
   } from 'typeorm';
 import { CategoryEntity } from './category.entity';
 import { OrderDetailEntity } from './order-details.entity';
+import { CommentEntity } from './comment.entity';
    
   @Entity()
   export class ProductEntity {
@@ -41,5 +42,8 @@ import { OrderDetailEntity } from './order-details.entity';
 
     @OneToMany(()=>OrderDetailEntity,(orderDetailEntity)=>orderDetailEntity.order)
     orderDetailEntity:OrderDetailEntity;
+
+    @OneToMany(()=>CommentEntity,(commentEntity)=>commentEntity.product)
+    commentEntity:CommentEntity;
   }
   
