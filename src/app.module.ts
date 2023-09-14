@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
-import { AuthModule } from './auth/auth.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { PaymentModule } from './payment/payment.module';
 import { ProductsModule } from './products/products.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { OrderModule } from './order/order.module';
+import { AuthenticationModule } from './authentication/authentication.module';
 @Module({
   imports: [
     ConfigModule.forRoot(), //cargara y analizar un archivo .env desde la ubicacion por default (root)
@@ -22,10 +22,10 @@ import { OrderModule } from './order/order.module';
       }),
       inject: [ConfigService],
     }),
-    AuthModule,
-    ProductsModule, //Con arquitectura hexagonal
+    AuthenticationModule,
+    ProductsModule,
     PaymentModule,
-    OrderModule
+    OrderModule,
   ],
   controllers: [],
   providers: [],

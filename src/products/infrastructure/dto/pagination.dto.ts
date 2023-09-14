@@ -6,4 +6,7 @@ export class PaginationDto {
 
   @IsOptional() 
   limit: any;
+
+  categoryId?:any
+  
 }

@@ -47,8 +47,6 @@ export class OrmProductRepository
     } else {
       return null; // No se encontró ningún resultado
     }
-    
-    return result;
   }
   async productByName(name: any): Promise<IGetProductRepositoryDto[]> {
     const product = await this.find({
@@ -59,14 +57,17 @@ export class OrmProductRepository
     return product;
   }
   
-  async productByCategory(id: any): Promise<IGetProductRepositoryDto[]> {
-    
+  async productByCategory(paginationDto: PaginationDto): Promise<IGetProductRepositoryDto[]> {    
+    const { page, limit } = paginationDto;
+    const offset = (page - 1) * limit;
     const product = await this.find({
       where: {
         category:{
-          id
+          id:paginationDto.categoryId
         }
-      }
+      },
+      skip: offset,
+      take:limit
     }); 
     return product;
   }
@@ -77,7 +78,7 @@ export class OrmProductRepository
       },
     });
   }
-  async products(pagination:PaginationDto): Promise<IGetProductRepositoryDto[]> {   
+  async products(pagination:PaginationDto): Promise<IGetProductRepositoryDto[]> {       
     const { page, limit } = pagination;
     const offset = (page - 1) * limit;
 

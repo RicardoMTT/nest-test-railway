@@ -33,11 +33,6 @@ export class ProductsController {
     private readonly _getProductMoreSaleUseCaseService: IUseCaseGetProductMoreSaleService,
   ) {}
 
-  @Get('/product-more-sale')
-  async getProductMoreSale() {
-    return this._getProductMoreSaleUseCaseService.getProductMoreSale();
-  }
-
   // limit = cuantos elementos quieres mostrar por pagina
   @Get('/')
   async products(
@@ -46,9 +41,25 @@ export class ProductsController {
     const pagination2: PaginationDto = {
       page: pagination.page,
       limit: pagination.limit,
+      categoryId: pagination.categoryId
     };
-    const response = await this._productService.products(pagination2);
-    return response;
+console.log('pagination2.categoryId',pagination2.categoryId);
+
+    if (pagination2.categoryId  != 4 ) {      
+      // Si categoryId está presente en el objeto PaginationDto,
+      // consulta productos por categoría utilizando el servicio adecuado
+      const response = this._getProductByCategoryUseCaseService.product(pagination2);
+      return response;
+    }else{      
+      const response = await this._productService.products(pagination2);
+      return response;
+
+    }
+  }
+
+  @Get('/product-more-sale')
+  async getProductMoreSale() {
+    return this._getProductMoreSaleUseCaseService.getProductMoreSale();
   }
 
   @Get(':id')
@@ -59,7 +70,7 @@ export class ProductsController {
 
   @Get('/products-by-category/:id')
   async getProductByCategory(@Param('id') id: number) {
-    return this._getProductByCategoryUseCaseService.product(id);
+    // return this._getProductByCategoryUseCaseService.product(id);
   }
 
   @Get('/products-by-term/:term')

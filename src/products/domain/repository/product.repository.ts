@@ -22,8 +22,8 @@ export class ProductRepository implements ICrudProductRepository {
 		return product;
 	}
 	
-	async productByCategory(categoryId: any): Promise<IProductRepositoryModel[]> {
-		const product = await this.ormProductRepository.productByCategory(categoryId);
+	async productByCategory(paginationDto: PaginationDto): Promise<IProductRepositoryModel[]> {
+		const product = await this.ormProductRepository.productByCategory(paginationDto);
 		return product;
 	}
 	

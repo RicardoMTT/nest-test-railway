@@ -1,1 +1,1 @@
-en esta carpeta se da la interaccion entre las entities y la bd
+En esta carpeta se da la interaccion entre las entities y la bd

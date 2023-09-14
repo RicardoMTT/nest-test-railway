@@ -7,7 +7,9 @@ import { PaginationDto } from '../infrastructure/dto/pagination.dto';
 
 @Injectable()
 export class ProductUseCaseService implements IUseCaseProductService {
-	constructor(@Inject(ProductRepository) private readonly productRepository: ICrudProductRepository) {}
+	
+    constructor(@Inject(ProductRepository) private readonly productRepository: ICrudProductRepository) {}
+    
     categories(): Promise<any> {
         throw new Error('Method not implemented.');
     }
