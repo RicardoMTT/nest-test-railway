@@ -27,6 +27,7 @@ export class OrmLoginRepository
           email: true,
           id: true,
           password: true,
+          name:true
         },
       });
 
@@ -40,6 +41,7 @@ export class OrmLoginRepository
         token: this.getJwtToken({ id: user.id }),
         id: user.id,
         email: user.email,
+        name:user.name
       };
     } catch (error) {
       throw new UnauthorizedException('Credentials are not valid');

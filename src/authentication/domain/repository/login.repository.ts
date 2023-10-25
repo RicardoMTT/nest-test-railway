@@ -14,9 +14,7 @@ export class LoginRepository implements ILoginRepository {
     }
 
     async login(body: ILoginRepositoryModelRequest): Promise<ILoginRepositoryModel> {
-        const response = await this.ormLoginRepository.login(body);
-        console.log('response 2', response);
-        
+        const response = await this.ormLoginRepository.login(body);        
         return response;
     }
 
